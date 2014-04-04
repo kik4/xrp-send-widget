@@ -41,8 +41,7 @@
     var icount = 0;
     var iamount = 0;
     data["result"]["transactions"].forEach(function(element){
-     if(element["tx"]["DestinationTag"] && element["tx"]["DestinationTag"] == 265
-     && element["tx"]["Destination"] && element["tx"]["Destinations"] == "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1")
+     if(element["tx"]["DestinationTag"] == 265 && element["tx"]["Destination"] == "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1")
      {
       icount += 1;
       iamount += parseInt(element["tx"]["Amount"]);
