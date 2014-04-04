@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>XRP send widget</title>
+<style type="text/css">
+ body{ margin: 100px 0px;}
+ #container{ width: 600px; margin: 0px auto; }
+</style>
+</head>
+<body>
+<div id="container">
+ <div id="header"><h1>XRP send widget: Test Page</h1></div>
+ <div id="content">
+  <p><a target="_blank" href="https://ripple.com//send?to=rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1&amount=10&dt=265"><strong>Tip XRP</strong></a> : rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1</p>
+  <div id="checker">
+  
+<script type="text/javascript">
+  var host = "wss:s1.ripple.com:443";
+  try {
+    socket = new WebSocket(host);
+    socket.onopen = function (openEvent) {
+       document.getElementById("serverStatus").innerHTML = 
+          'Status: Opened';
+ socket.send('{"command": "account_tx","account": "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1","ledger_index_min": -1,"ledger_index_max": -1}');
+    };
+
+ socket.onerror = function (errorEvent) {
+    document.getElementById("serverStatus").innerHTML = 
+      'Status: Error';
+    };
+
+ socket.onclose = function (closeEvent) {
+    document.getElementById("serverStatus").innerHTML = 
+      'Status: Closed';
+    };
+
+ socket.onmessage = function (messageEvent) {
+    document.getElementById("serverStatus").innerHTML = 
+      'Status: Messaged';
+    var data = eval("("+messageEvent.data+")");
+    var icount = 0;
+    var iamount = 0;
+    data["result"]["transactions"].forEach(function(element){
+     if(element["tx"]["DestinationTag"] == 265 && element["tx"]["Destination"] == "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1")
+     {
+      icount += 1;
+      iamount += parseInt(element["tx"]["Amount"]);
+     }
+      });
+    document.getElementById("count").innerHTML = icount;
+    document.getElementById("amount").innerHTML = drops2xrp(iamount) + "XRP";
+    socket.close();
+   };
+
+}catch (exception) { if (window.console) console.log(exception); }
+
+function drops2xrp(drops)
+{
+    return drops / 1000000;
+}
+
+</script>
+  <p><span id="serverStatus">serverStatus</span></p>
+  <p>count: <span id="count">Loading...</span></p>
+  <p>amount: <span id="amount">Loading...</span></p>
+  </div>
+ </div>
+</div>
+</body>
+</html>​
+
