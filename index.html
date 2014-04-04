@@ -1,22 +1,49 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-<title>XRP send widget</title>
-<link rel="stylesheet" href="./style.css" type="text/css" media="all">
-<script type="text/javascript" src="xrp-send-widget.js"></script>
-</head>
-<body>
-<div id="container">
- <div id="header"><h1>XRP send widget: Test Page</h1></div>
- <div id="content">
-  <p><a target="_blank" href="https://ripple.com//send?to=rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1&amount=10&dt=265"><strong>Tip XRP</strong></a> : rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1</p>
-  <div id="checker">
-  <p><span id="serverStatus">serverStatus</span></p>
-  <p>count: <span id="count">Loading...</span></p>
-  <p>amount: <span id="amount">Loading...</span></p>
-  </div>
- </div>
-</div>
-</body>
+	<head>
+		<title>XRP send widget</title>
+		<link rel="stylesheet" href="./style.css" type="text/css" media="all">
+		<script type="text/javascript" src="xrp-send-widget.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<h1>XRP send widget: Test Page</h1>
+			</div>
+			<div id="content">
+				<div id="tip_xrp">
+					<h2>Test Button</h2>
+					<div class="tip_xrp_button_container">
+						<a class="tip_xrp_button" target="_blank" href="https://ripple.com//send?to=rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1&amount=10&dt=265">Tip XRP</a>
+					</div>
+					<div id="button_information">
+						<p>
+							Destination ID: rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1
+						</p>
+						<p>
+							Default Amount: 10
+						</p>
+						<p>
+							Destination Tag: 265
+						</p>
+					</div>
+				</div>
+				<div id="checker">
+					<h2>Check Status</h2>
+					<p>
+						<span id="serverStatus">serverStatus</span>
+					</p>
+					<p>
+						Count: <span id="count">Loading...</span>
+					</p>
+					<p>
+						Amount: <span id="amount">Loading...</span>
+					</p>
+				</div>
+				<div id="footer">
+					It is under development.
+				</div>
+			</div>
+		</div>	</body>
 </html>​
 

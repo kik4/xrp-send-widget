@@ -1,8 +1,57 @@
-﻿body{
-margin: 100px 0px;
+﻿body {
+	background: none repeat scroll 0% 0% #ffffff;
+	color: #3372ad;
+	font-family: Meiryo, sans-serif;
+	font-size: 18px;
+	margin: 100px 0px 0px 0px;
 }
 
-#container{
-width: 600px;
-margin: 0px auto;
+#container {
+	width: 600px;
+	margin: 0px auto;
+}
+
+#tip_xrp {
+	border: 2px solid #3372ad;
+	border-radius: 5px;
+	padding: 0px 20px;
+}
+
+.tip_xrp_button_container {
+	text-align: center;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #3372ad;
+}
+
+.tip_xrp_button {
+	background: none repeat scroll 0% 0% #3372ad;
+	border-radius: 5px;
+	padding: 0px 20px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #FFFFFF;
+	height: 40px;
+	line-height: 42px;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: bold;
+	text-align: center;
+}
+
+#button_information {
+	clear: both;
+	padding: 10px;
+	font-size: 15px;
+}
+
+#checker {
+	margin-top: 10px;
+	border: 3px double #3372ad;
+	padding: 0px 20px;
+}
+
+#footer{
+	margin: 50px 0px;
+	padding: 10px 10px 0px 10px;
+	border-top: 1px double #3372ad;
 }
