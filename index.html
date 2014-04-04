@@ -3,21 +3,21 @@
 <head>
 <title>XRP send widget</title>
 <style type="text/css">
-body{ margin: 100px 0px;}
-#container{ width: 600px; margin: 0px auto; }
+ body{ margin: 100px 0px;}
+ #container{ width: 600px; margin: 0px auto; }
 </style>
 </head>
 <body>
 <div id="container">
-<div id="header"><h1>XRP send widget</h1></div>
-<div id="content">
-<p><a href="https://ripple.com//send?to=rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1&amount=10&dt=265">Tip XRP</a> : rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1</p>
-<div id="checker">
+ <div id="header"><h1>XRP send widget</h1></div>
+ <div id="content">
+  <p><a target="_blank" href="https://ripple.com//send?to=rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1&amount=10&dt=265">Tip XRP</a> : rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1</p>
+  <div id="checker">
+  
 <script type="text/javascript">
-var host = "wss:s1.ripple.com:443";
-try {
+  var host = "wss:s1.ripple.com:443";
+  try {
     socket = new WebSocket(host);
-
     socket.onopen = function (openEvent) {
        document.getElementById("serverStatus").innerHTML = 
           'WebSocket Status:: Socket Open';
@@ -37,33 +37,34 @@ try {
  socket.onmessage = function (messageEvent) {
     document.getElementById("serverStatus").innerHTML = 
       'WebSocket Status:: Socket Messaged';
-var data = eval("("+messageEvent.data+")");
+    var data = eval("("+messageEvent.data+")");
     var icount = 0;
     var iamount = 0;
-   data["result"]["transactions"].forEach(function(element){
-if(element["tx"]["DestinationTag"])
-{
-icount += 1;
-iamount += parseInt(element["tx"]["Amount"]);
-}
-});
+    data["result"]["transactions"].forEach(function(element){
+     if(element["tx"]["DestinationTag"])
+     {
+      icount += 1;
+      iamount += parseInt(element["tx"]["Amount"]);
+     }
+      });
     document.getElementById("count").innerHTML = icount;
     document.getElementById("amount").innerHTML = drops2xrp(iamount) + "XRP";
-socket.close();
+    socket.close();
    };
 
 }catch (exception) { if (window.console) console.log(exception); }
 
 function drops2xrp(drops)
 {
-return drops / 1000000;
+    return drops / 1000000;
 }
+
 </script>
-<p><span id="serverStatus">serverStatus</span></p>
-<p>count: <span id="count">Loading...</span></p>
-<p>amount: <span id="amount">Loading...</span></p>
-</div>
-</div>
+  <p><span id="serverStatus">serverStatus</span></p>
+  <p>count: <span id="count">Loading...</span></p>
+  <p>amount: <span id="amount">Loading...</span></p>
+  </div>
+ </div>
 </div>
 </body>
 </html>​
