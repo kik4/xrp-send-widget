@@ -20,23 +20,23 @@
     socket = new WebSocket(host);
     socket.onopen = function (openEvent) {
        document.getElementById("serverStatus").innerHTML = 
-          'WebSocket Status:: Socket Open';
+          'Status: Opened';
  socket.send('{"command": "account_tx","account": "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1","ledger_index_min": -1,"ledger_index_max": -1}');
     };
 
  socket.onerror = function (errorEvent) {
     document.getElementById("serverStatus").innerHTML = 
-      'WebSocket Status:: Error was reported';
+      'Status: Error';
     };
 
  socket.onclose = function (closeEvent) {
     document.getElementById("serverStatus").innerHTML = 
-      'WebSocket Status:: Socket Closed';
+      'Status: Closed';
     };
 
  socket.onmessage = function (messageEvent) {
     document.getElementById("serverStatus").innerHTML = 
-      'WebSocket Status:: Socket Messaged';
+      'Status: Messaged';
     var data = eval("("+messageEvent.data+")");
     var icount = 0;
     var iamount = 0;
