@@ -15,65 +15,67 @@ xrp_send_widget.set = function(setting) {
 		return arguments.callee(e.lastChild)
 	})(document);
 
-	var wid = document.createElement('div');
-	wid.className = 'xrp_send_widget';
-	currentScript.parentNode.appendChild(wid);
-	var but = document.createElement('a');
-	but.className = 'xrp_send_widget_button';
-	but.innerHTML = 'Tip XRP';
-	but.target = '_blank';
-	but.href = "https://ripple.com//send?to=" + setting.to + "&amount=" + setting.amount + "&dt=" + setting.dt;
-	but.title = "To:" + setting.to;
-	wid.appendChild(but);
-	var bal = document.createElement('div');
-	bal.className = 'xrp_send_widget_balloon';
-	wid.appendChild(bal);
+	link.onload = function() {
+		var wid = document.createElement('div');
+		wid.className = 'xrp_send_widget';
+		currentScript.parentNode.replaceChild(wid,currentScript);
+		var but = document.createElement('a');
+		but.className = 'xrp_send_widget_button';
+		but.innerHTML = 'Tip XRP';
+		but.target = '_blank';
+		but.href = "https://ripple.com//send?to=" + setting.to + "&amount=" + setting.amount + "&dt=" + setting.dt;
+		but.title = "To:" + setting.to;
+		wid.appendChild(but);
+		var bal = document.createElement('div');
+		bal.className = 'xrp_send_widget_balloon';
+		wid.appendChild(bal);
 
-	var host = "wss:s1.ripple.com:443";
-	try {
-		var socket = new WebSocket(host);
+		var host = "wss:s1.ripple.com:443";
+		try {
+			var socket = new WebSocket(host);
 
-		var message = '{"command": "account_tx","account": "' + setting.to + '","ledger_index_min": -1,"ledger_index_max": -1}';
+			var message = '{"command": "account_tx","account": "' + setting.to + '","ledger_index_min": -1,"ledger_index_max": -1}';
 
-		socket.onopen = function(openEvent) {
-			if (document.getElementById("server_status"))
-				document.getElementById("server_status").innerHTML = "Opened";
-			socket.send(message);
-		};
-
-		socket.onmessage = function(messageEvent) {
-			if (document.getElementById("server_status"))
-				document.getElementById("server_status").innerHTML = "Messaged";
-			var data = eval("(" + messageEvent.data + ")");
-			if (data["status"] != "success") {
+			socket.onopen = function(openEvent) {
+				if (document.getElementById("server_status"))
+					document.getElementById("server_status").innerHTML = "Opened";
 				socket.send(message);
-				return;
-			}
-			var icount = 0;
-			var iamount = 0;
-			data["result"]["transactions"].forEach(function(element) {
-				if (element["tx"]["DestinationTag"] == setting.dt && element["tx"]["Destination"] == setting.to) {
-					icount += 1;
-					iamount += parseInt(element["tx"]["Amount"]);
+			};
+
+			socket.onmessage = function(messageEvent) {
+				if (document.getElementById("server_status"))
+					document.getElementById("server_status").innerHTML = "Messaged";
+				var data = eval("(" + messageEvent.data + ")");
+				if (data["status"] != "success") {
+					socket.send(message);
+					return;
 				}
-			});
-			bal.innerHTML = xrp_send_widget.drops2xrp(iamount) + "XRP / " + icount;
-			bal.style.visibility = "visible";
-			socket.close();
-		};
+				var icount = 0;
+				var iamount = 0;
+				data["result"]["transactions"].forEach(function(element) {
+					if (element["tx"]["DestinationTag"] == setting.dt && element["tx"]["Destination"] == setting.to) {
+						icount += 1;
+						iamount += parseInt(element["tx"]["Amount"]);
+					}
+				});
+				bal.innerHTML = xrp_send_widget.drops2xrp(iamount) + "XRP / " + icount;
+				bal.style.visibility = "visible";
+				socket.close();
+			};
 
-		socket.onclose = function(closeEvent) {
-			if (document.getElementById("server_status"))
-				document.getElementById("server_status").innerHTML = "Closed";
-		}
+			socket.onclose = function(closeEvent) {
+				if (document.getElementById("server_status"))
+					document.getElementById("server_status").innerHTML = "Closed";
+			}
 
-		socket.onerror = function(errorEvent) {
+			socket.onerror = function(errorEvent) {
+				if (document.getElementById("server_status"))
+					document.getElementById("server_status").innerHTML = "Error";
+			}
+		} catch (exception) {
 			if (document.getElementById("server_status"))
-				document.getElementById("server_status").innerHTML = "Error";
+				document.getElementById("server_status").innerHTML = "Excepted";
 		}
-	} catch (exception) {
-		if (document.getElementById("server_status"))
-			document.getElementById("server_status").innerHTML = "Excepted";
 	}
 }
 
