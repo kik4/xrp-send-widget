@@ -3,7 +3,7 @@ xrp_send_widget = new Object();
 xrp_send_widget.set = function(setting) {
 
 	var link = document.createElement('link');
-	link.href = './xrp-send-widget.css';
+	link.href = 'https://raw.githubusercontent.com/kikkikkikkik/xrp-send-widget/gh-pages/xrp-send-widget.css';
 	link.rel = 'stylesheet';
 	link.type = 'text/css';
 	var h = document.getElementsByTagName('head')[0];

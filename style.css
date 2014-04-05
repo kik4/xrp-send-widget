@@ -23,10 +23,11 @@ body {
 
 .html_code {
 	font-size: 12px;
-	border:1px solid #3372ad;
+	border: 1px solid #3372ad;
 	display: block;
-	margin:5px;
-	padding:0 10px;
+	margin: 5px;
+	padding: 0 10px;
+	overflow: scroll;
 }
 
 #footer {
