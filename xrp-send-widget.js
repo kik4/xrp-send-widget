@@ -1,55 +1,82 @@
-window.onload = function() {
-	onloadfunc();
-}
-function onloadfunc() {
+xrp_send_widget = new Object();
+
+xrp_send_widget.set = function(setting) {
+
+	var link = document.createElement('link');
+	link.href = './xrp-send-widget.css';
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	var h = document.getElementsByTagName('head')[0];
+	h.appendChild(link);
+
+	var currentScript = (function(e) {
+		if (e.nodeName.toLowerCase() == 'script')
+			return e;
+		return arguments.callee(e.lastChild)
+	})(document);
+
+	var wid = document.createElement('div');
+	wid.className = 'xrp_send_widget';
+	currentScript.parentNode.appendChild(wid);
+	var but = document.createElement('a');
+	but.className = 'xrp_send_widget_button';
+	but.innerHTML = 'Tip XRP';
+	but.target = '_blank';
+	but.href = "https://ripple.com//send?to=" + setting.to + "&amount=" + setting.amount + "&dt=" + setting.dt;
+	but.title = "To:" + setting.to;
+	wid.appendChild(but);
+	var bal = document.createElement('div');
+	bal.className = 'xrp_send_widget_balloon';
+	wid.appendChild(bal);
+
 	var host = "wss:s1.ripple.com:443";
 	try {
-		socket = new WebSocket(host);
+		var socket = new WebSocket(host);
 
-		var tip_xrp_button = document.getElementById("tip_xrp_button");
-		var dst_account = tip_xrp_button.dataset.to;
-		var def_amount = tip_xrp_button.dataset.amount;
-		var dst_tag = tip_xrp_button.dataset.dt;
-
-		tip_xrp_button.href = "https://ripple.com//send?to=" + dst_account + "&amount=" + def_amount + "&dt=" + dst_tag;
+		var message = '{"command": "account_tx","account": "' + setting.to + '","ledger_index_min": -1,"ledger_index_max": -1}';
 
 		socket.onopen = function(openEvent) {
-			document.getElementById("serverStatus").innerHTML = 'Status: Opened';
-			socket.send('{"command": "account_tx","account": "' + dst_account + '","ledger_index_min": -1,"ledger_index_max": -1}');
-		};
-
-		socket.onerror = function(errorEvent) {
-			document.getElementById("serverStatus").innerHTML = 'Status: Error';
-		};
-
-		socket.onclose = function(closeEvent) {
-			document.getElementById("serverStatus").innerHTML = 'Status: Closed';
+			if (document.getElementById("server_status"))
+				document.getElementById("server_status").innerHTML = "Opened";
+			socket.send(message);
 		};
 
 		socket.onmessage = function(messageEvent) {
-			document.getElementById("serverStatus").innerHTML = 'Status: Messaged';
+			if (document.getElementById("server_status"))
+				document.getElementById("server_status").innerHTML = "Messaged";
 			var data = eval("(" + messageEvent.data + ")");
+			if (data["status"] != "success") {
+				socket.send(message);
+				return;
+			}
 			var icount = 0;
 			var iamount = 0;
 			data["result"]["transactions"].forEach(function(element) {
-				if (element["tx"]["DestinationTag"] == dst_tag && element["tx"]["Destination"] == dst_account) {
+				if (element["tx"]["DestinationTag"] == setting.dt && element["tx"]["Destination"] == setting.to) {
 					icount += 1;
 					iamount += parseInt(element["tx"]["Amount"]);
 				}
 			});
-			document.getElementById("count").innerHTML = icount;
-			document.getElementById("amount").innerHTML = drops2xrp(iamount) + "XRP";
-			document.getElementById("amount_box").innerHTML = drops2xrp(iamount) + "XRP";
-			document.getElementById("amount_box").style.visibility = "visible";
+			bal.innerHTML = xrp_send_widget.drops2xrp(iamount) + "XRP / " + icount;
+			bal.style.visibility = "visible";
 			socket.close();
 		};
 
+		socket.onclose = function(closeEvent) {
+			if (document.getElementById("server_status"))
+				document.getElementById("server_status").innerHTML = "Closed";
+		}
+
+		socket.onerror = function(errorEvent) {
+			if (document.getElementById("server_status"))
+				document.getElementById("server_status").innerHTML = "Error";
+		}
 	} catch (exception) {
-		if (window.console)
-			console.log(exception);
+		if (document.getElementById("server_status"))
+			document.getElementById("server_status").innerHTML = "Excepted";
 	}
 }
 
-function drops2xrp(drops) {
+xrp_send_widget.drops2xrp = function(drops) {
 	return drops / 1000000;
 }

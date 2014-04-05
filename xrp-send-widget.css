@@ -1,0 +1,55 @@
+﻿.xrp_send_widget {
+	text-align: left;
+	display: inline-block;
+}
+
+.xrp_send_widget_button{
+	background: none repeat scroll 0% 0% #3372ad;
+	border-radius: 5px;
+	padding: 0px 20px;
+	text-decoration: none;
+	font-size: 14px;
+	color: #FFFFFF;
+	height: 26px;
+	line-height: 28px;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.xrp_send_widget_balloon {
+	visibility: hidden;
+	display: inline-block;
+	position: relative;
+	background: #ffffff;
+	height: 24px;
+	width: auto;
+	padding: 0px 7px;
+	font-size: 14px;
+	margin-left: 5px;
+	border: 1px solid #3372ad;
+	vertical-align: middle;
+	line-height: 26px;
+}
+
+.xrp_send_widget_balloon:after {
+	content: '';
+	position: absolute;
+	border-right: 10px solid #ffffff;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	left: -9px;
+	bottom: 7px;
+}
+
+.xrp_send_widget_balloon:before {
+	content: '';
+	position: absolute;
+	border-right: 10px solid #3372ad;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	left: -11px;
+	bottom: 7px;
+}

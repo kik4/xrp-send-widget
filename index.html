@@ -8,41 +8,50 @@
 	<body>
 		<div id="container">
 			<div id="header">
-				<h1>XRP send widget: Test Page</h1>
+				<h1>XRP send widget</h1>
 			</div>
 			<div id="content">
-				<div id="tip_xrp">
-					<h2>Test Button</h2>
-					<div id="tip_xrp_button_container">
-						<a id="tip_xrp_button" target="_blank" href="" data-to="rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1" data-amount="10" data-dt="265">Tip XRP</a>
-						<div id="amount_box">n/a</div>
+				<div id="test_button_div">
+					<div>
+						<h2>Sample</h2>
+						<script>
+							xrp_send_widget.set({
+								to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
+								amount : "10",
+								dt : "265",
+							});
+						</script>
 					</div>
-					<div id="button_information">
-						<p>
-							Destination ID: rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1
-						</p>
-						<p>
-							Default Amount: 10
-						</p>
-						<p>
-							Destination Tag: 265
-						</p>
+					<div>
+						<h2>Code</h2>
+						<code class="html_code">
+							<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;xrp-send-widget.js&quot;&gt;&lt;/script&gt;</pre>
+						</code>
+						<code class="html_code">
+							<pre>&lt;script&gt;
+	xrp_send_widget.set({
+		to : &quot;rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1&quot;,
+		amount : &quot;10&quot;,
+		dt : &quot;265&quot;,
+	});
+&lt;/script&gt;</pre>
+						</code>
 					</div>
-				</div>
-				<div id="checker">
-					<h2>Check Status</h2>
-					<p>
-						<span id="serverStatus">serverStatus</span>
-					</p>
-					<p>
-						Count: <span id="count">Loading...</span>
-					</p>
-					<p>
-						Amount: <span id="amount">Loading...</span>
-					</p>
 				</div>
 				<div id="footer">
-					It is under development.
+					<p>
+						Thank you.
+					</p>
+					<script>
+						xrp_send_widget.set({
+							to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
+							amount : "10",
+							dt : "265",
+						});
+					</script>
+					<p>
+						Server Status: <span id="server_status">Loading</span>
+					</p>
 				</div>
 			</div>
 		</div>

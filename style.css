@@ -15,81 +15,22 @@ body {
 	margin: 0px auto;
 }
 
-#tip_xrp {
+#test_button_div {
 	border: 2px solid #3372ad;
 	border-radius: 5px;
-	padding: 0px 20px;
+	padding: 0px 20px 30px;
 }
 
-#tip_xrp_button_container {
-	text-align: center;
-	padding-bottom: 20px;
-	border-bottom: 1px solid #3372ad;
-}
-
-#tip_xrp_button {
-	background: none repeat scroll 0% 0% #3372ad;
-	border-radius: 5px;
-	padding: 0px 20px;
-	text-decoration: none;
-	font-size: 20px;
-	color: #FFFFFF;
-	height: 40px;
-	line-height: 42px;
-	cursor: pointer;
-	display: inline-block;
-	font-weight: bold;
-	text-align: center;
-	vertical-align: middle;
-}
-
-#amount_box {
-	visibility: hidden;
-	display: inline-block;
-	position: relative;
-	background: #ffffff;
-	height: 35px;
-	width: 100px;
-	margin-left: 5px;
-	border: 1px solid #3372ad;
-	vertical-align: middle;
-	line-height: 35px;
-}
-
-#amount_box:after {
-	content: '';
-	position: absolute;
-	border-right: 10px solid #ffffff;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	left: -9px;
-	bottom: 12px;
-}
-
-#amount_box:before {
-	content: '';
-	position: absolute;
-	border-right: 10px solid #3372ad;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	left: -11px;
-	bottom: 12px;
-}
-
-#button_information {
-	clear: both;
-	padding: 10px;
-	font-size: 15px;
-}
-
-#checker {
-	margin-top: 10px;
-	border: 3px double #3372ad;
-	padding: 0px 20px;
+.html_code {
+	font-size: 12px;
+	border:1px solid #3372ad;
+	display: block;
+	margin:5px;
+	padding:0 10px;
 }
 
 #footer {
-	margin: 50px 0px;
+	margin: 50px 50px 0px;
 	padding: 10px 10px 0px 10px;
 	border-top: 1px double #3372ad;
 }
