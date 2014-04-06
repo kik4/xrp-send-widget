@@ -18,7 +18,11 @@ body {
 #test_button_div {
 	border: 2px solid #3372ad;
 	border-radius: 5px;
-	padding: 0px 20px 30px;
+	padding: 50px 20px;
+}
+
+.code_block {
+	margin: 50px 0px 0px;
 }
 
 .html_code {
@@ -27,7 +31,33 @@ body {
 	display: block;
 	margin: 5px;
 	padding: 0 10px;
-	overflow: scroll;
+	overflow: auto;
+}
+
+#description_table {
+	font-size: 16px;
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 50px;
+}
+#description_table thead {
+	border-top: 2px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+	font-weight: bold;
+}
+#description_table tr {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+#description_table td {
+	padding: 10px;
+	vertical-align: middle;
+}
+#description_table tbody td {
+	background-color: rgba(0, 0, 0, 0.01);
+	font-size: 14px;
+}
+#description_table tbody tr:nth-child(2n) {
+	background-color: rgba(0, 0, 0, 0.01);
 }
 
 #footer {

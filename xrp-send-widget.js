@@ -2,6 +2,25 @@ xrp_send_widget = new Object();
 
 xrp_send_widget.set = function(setting) {
 
+	if (setting.to == undefined)
+		return;
+	var sendurl = "https://ripple.com//send?to=" + setting.to;
+	if (setting.amount == undefined)
+		setting.amount = 0;
+	else
+		sendurl += "&amount=" + setting.amount;
+	if (setting.dt == undefined)
+		setting.dt = 265;
+	sendurl += "&dt=" + setting.dt;
+	if (setting.text == undefined)
+		setting.text = 'Tip XRP';
+	if (setting.show_count == undefined)
+		setting.show_count = false;
+	if (setting.show_amount == undefined)
+		setting.show_amount = false;
+	if (setting.show_title == undefined)
+		setting.show_title = false;
+
 	var link = document.createElement('link');
 	link.href = 'https://rawgithub.com/kikkikkikkik/xrp-send-widget/gh-pages/xrp-send-widget.css';
 	link.rel = 'stylesheet';
@@ -18,17 +37,22 @@ xrp_send_widget.set = function(setting) {
 	link.onload = function() {
 		var wid = document.createElement('div');
 		wid.className = 'xrp_send_widget';
-		currentScript.parentNode.replaceChild(wid,currentScript);
+		currentScript.parentNode.replaceChild(wid, currentScript);
 		var but = document.createElement('a');
 		but.className = 'xrp_send_widget_button';
-		but.innerHTML = 'Tip XRP';
+		but.innerHTML = setting.text;
 		but.target = '_blank';
-		but.href = "https://ripple.com//send?to=" + setting.to + "&amount=" + setting.amount + "&dt=" + setting.dt;
-		but.title = "To:" + setting.to;
+		but.href = sendurl;
+		if (setting.show_title)
+			but.title = "To:" + setting.to;
 		wid.appendChild(but);
-		var bal = document.createElement('div');
-		bal.className = 'xrp_send_widget_balloon';
-		wid.appendChild(bal);
+		if (setting.show_count || setting.show_amount) {
+			var bal = document.createElement('div');
+			bal.className = 'xrp_send_widget_balloon';
+			wid.appendChild(bal);
+		} else {
+			return;
+		}
 
 		var host = "wss:s1.ripple.com:443";
 		try {
@@ -58,7 +82,17 @@ xrp_send_widget.set = function(setting) {
 						iamount += parseInt(element["tx"]["Amount"]);
 					}
 				});
-				bal.innerHTML = xrp_send_widget.drops2xrp(iamount) + "XRP / " + icount;
+				if (setting.show_amount) {
+					if (setting.show_count) {
+						bal.innerHTML = xrp_send_widget.drops2xrp(iamount) + "XRP / " + icount;
+					} else {
+						bal.innerHTML = xrp_send_widget.drops2xrp(iamount) + "XRP";
+					}
+				} else {
+					if (setting.show_count) {
+						bal.innerHTML = icount;
+					}
+				}
 				bal.style.visibility = "visible";
 				socket.close();
 			};

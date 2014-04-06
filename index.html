@@ -12,18 +12,18 @@
 			</div>
 			<div id="content">
 				<div id="test_button_div">
-					<div>
-						<h2>Sample</h2>
-						<script>
-							xrp_send_widget.set({
-								to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
-								amount : "10",
-								dt : "265",
-							});
-						</script>
-					</div>
-					<div>
-						<h2>Code</h2>
+					<script>
+						xrp_send_widget.set({
+							to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
+							amount : "10",
+							dt : "265",
+							text : "Send XRP (open your wallet)",
+							show_count : true,
+							show_amount : true,
+							show_title : true,
+						});
+					</script>
+					<div class="code_block">
 						<code class="html_code">
 							<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;https://raw.githubusercontent.com/kikkikkikkik/xrp-send-widget/gh-pages/xrp-send-widget.js&quot;&gt;&lt;/script&gt;</pre>
 						</code>
@@ -33,26 +33,69 @@
 		to : &quot;rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1&quot;,
 		amount : &quot;10&quot;,
 		dt : &quot;265&quot;,
+		text : &quot;Send XRP (open your wallet)&quot;,
+		show_count : true,
+		show_amount : true,
+		show_title : true,
 	});
 &lt;/script&gt;</pre>
 						</code>
 					</div>
+					<table id="description_table">
+						<thead>
+							<tr>
+								<td>Parameter</td>
+								<td>Description</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>to</td>
+								<td>Your wallet address. (required)</td>
+							</tr>
+							<tr>
+								<td>amount</td>
+								<td>Show default amount.</td>
+							</tr>
+							<tr>
+								<td>dt</td>
+								<td>The number to identify transactions. Default value is 265.</td>
+							</tr>
+							<tr>
+								<td>text</td>
+								<td>Change the text on button. Default value is &quot;Tip XRP&quot;.</td>
+							</tr>
+							<tr>
+								<td>show_count</td>
+								<td>Set true to show the total number of transactions.</td>
+							</tr>
+							<tr>
+								<td>show_amount</td>
+								<td>Set true to show the total amount of XRP received.</td>
+							</tr>
+							<tr>
+								<td>show_title</td>
+								<td>Set true if you want to show your wallet address when the mouse pointer is over the button.</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<div id="footer">
-					<p>
-						Thank you.
-					</p>
-					<script>
-						xrp_send_widget.set({
-							to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
-							amount : "10",
-							dt : "265",
-						});
-					</script>
-					<p>
-						Server Status: <span id="server_status">Loading</span>
-					</p>
-				</div>
+			</div>
+			<div id="footer">
+				<p>
+					XRP send widget is in BETA because Ripple also.
+				</p>
+				<p>
+					Thank you.
+				</p>
+				<script>
+					xrp_send_widget.set({
+						to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
+					});
+				</script>
+				<p>
+					Server Status: <span id="server_status">Loading</span>
+				</p>
 			</div>
 		</div>
 	</body>
