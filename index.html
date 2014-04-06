@@ -1,28 +1,39 @@
 ﻿<!DOCTYPE html>
 <html>
 	<head>
-		<title>XRP send widget</title>
+		<title>XRP Send Widget</title>
 		<link rel="stylesheet" href="./style.css" type="text/css" media="all">
 		<script type="text/javascript" src="https://raw.githubusercontent.com/kikkikkikkik/xrp-send-widget/gh-pages/xrp-send-widget.js"></script>
 	</head>
 	<body>
 		<div id="container">
 			<div id="header">
-				<h1>XRP send widget</h1>
+				<h1>XRP Send Widget</h1>
 			</div>
 			<div id="content">
 				<div id="test_button_div">
-					<script>
-						xrp_send_widget.set({
-							to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
-							amount : "10",
-							dt : "265",
-							text : "Send XRP (open your wallet)",
-							show_count : true,
-							show_amount : true,
-							show_title : true,
-						});
-					</script>
+					<div class="button_div">
+						<script>
+							xrp_send_widget.set({
+								to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
+								amount : "10",
+								dt : "265",
+								text : "Send XRP (open your wallet)",
+								show_count : true,
+								show_amount : true,
+								show_title : true,
+							});
+						</script>
+						<br/>
+					</div>
+					<div class="button_div">
+						<script>
+							xrp_send_widget.set({
+								to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
+							});
+						</script>
+						(minimum options)
+					</div>
 					<div class="code_block">
 						<code class="html_code">
 							<pre>&lt;script type=&quot;text/javascript&quot; src=&quot;https://raw.githubusercontent.com/kikkikkikkik/xrp-send-widget/gh-pages/xrp-send-widget.js&quot;&gt;&lt;/script&gt;</pre>
@@ -83,16 +94,20 @@
 			</div>
 			<div id="footer">
 				<p>
-					XRP send widget is in BETA because Ripple also.
-				</p>
-				<p>
-					Thank you.
+					XRP Send Widget is in BETA because Ripple also.
 				</p>
 				<script>
 					xrp_send_widget.set({
 						to : "rfSSHTYGrQDZigrvvXyia2j6PCvAZADDD1",
+						text : "Donate to XRP Send Widget",
+						show_count : true,
+						show_amount : true,
+						show_title : true,
 					});
 				</script>
+				<p>
+					Thank you.
+				</p>
 				<p>
 					Server Status: <span id="server_status">Loading</span>
 				</p>
