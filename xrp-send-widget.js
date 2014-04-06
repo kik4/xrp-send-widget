@@ -71,7 +71,6 @@ xrp_send_widget.set = function(setting) {
 					document.getElementById("server_status").innerHTML = "Messaged";
 				var data = eval("(" + messageEvent.data + ")");
 				if (data["status"] != "success") {
-					socket.send(message);
 					return;
 				}
 				var icount = 0;
